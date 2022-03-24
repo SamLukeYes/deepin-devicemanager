@@ -57,25 +57,15 @@ public:
     bool getInfo(const QString &key, QString &info);
 
     /**
-     * @brief reqUpdateUI : Request udpates from the background
-     * @param start : Whether to start the device manager
+     * @brief isFirstUpdate 判断后台是否有惊醒第一次update
      * @return
      */
-    bool reqUpdateUI(bool start = true);
+    bool isFirstUpdate();
 
     /**
-     * @brief execDriverOrder 通过驱动禁用设备
-     * @param cmd cmd needed to be exec
-     * @return
+     * @brief refreshInfo 用来通知后台刷新信息
      */
-    bool execDriverOrder(const QString &cmd);
-
-    /**
-     * @brief execIfconfigOrder 通过ifconfig启用禁用网卡
-     * @param cmd cmd needed to be exec
-     * @return
-     */
-    bool execIfconfigOrder(const QString &cmd);
+    void refreshInfo();
 
 protected:
     DBusInterface();

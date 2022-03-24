@@ -60,12 +60,6 @@ public:
     void setDmesgInfo(const QString &info);
 
     /**
-     * @brief setNvidiaInfo:设置从nvidia-settings中获取的显存信息
-     * @param info: nvidia-settings中获取的显存信息
-     */
-    void setNvidiaInfo(const QString &info);
-
-    /**
        * @brief setGpuInfo:设置从gpuinfo命令中获取的信息，华为KLU笔记本和PanGuV机器专用
        * @param mapInfo:由gpuinfo获取的信息map
        */
@@ -144,8 +138,6 @@ private:
     QString            m_IOPort;                  //<! 【ioport】
     QString            m_MemAddress;              //<! 【内存地址】
     QString            m_PhysID;                  //<! 【物理ID】
-
-    QString            m_UniqueKey;               //<! 【标识一个适配器的唯一标识】
 };
 
 #endif // DEVICEGPU_H

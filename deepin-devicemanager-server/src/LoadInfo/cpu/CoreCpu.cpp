@@ -29,6 +29,8 @@ void CoreCpu::addLogicalCpu(int id, const LogicalCpu& lc)
 
 bool CoreCpu::logicalIsExisted(int id)
 {
+    if(m_CoreId < 0)
+        return false;
     return m_MapLogicalCpu.find(id) != m_MapLogicalCpu.end();
 }
 
@@ -90,5 +92,14 @@ int CoreCpu::logicalNum()
     }
     else{
         return m_MapLogicalCpu.size() - 1;
+    }
+}
+void CoreCpu::diagPrintInfo()
+{
+    qInfo() << "CoreCpu m_CoreId: ***************** " << m_CoreId;
+    foreach (int id, m_MapLogicalCpu.keys()) {
+        qInfo() << "m_MapPhysicalCpu id: ***************** " << id;
+        LogicalCpu &lc = m_MapLogicalCpu[id];
+        lc.diagPrintInfo();
     }
 }
