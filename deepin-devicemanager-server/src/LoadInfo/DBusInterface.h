@@ -34,13 +34,8 @@ class DBusInterface : public QObject, protected QDBusContext
 public:
     explicit DBusInterface(QObject *parent = nullptr);
 
-    /**
-     * @brief setMainJob 设置主线job
-     * @param job
-     */
-    void setMainJob(MainJob *job);
-
 signals:
+    void update();
 
 public slots:
     /**
@@ -51,14 +46,16 @@ public slots:
     Q_SCRIPTABLE QString getInfo(const QString &key);
 
     /**
-     * @brief exceCmd : Exec cmd through the DBus
-     * @param cmd : the cmd
-     * @return : result
+     * @brief isFirstUpdate
+     * @return
      */
-    Q_SCRIPTABLE QString execCmd(const QString &cmd);
+    Q_SCRIPTABLE bool isFirstUpdate();
 
-private:
-    MainJob *mp_MainJob;       //<!         主线job
+    /**
+     * @brief refreshInfo
+     * @return
+     */
+    Q_SCRIPTABLE void refreshInfo();
 };
 
 #endif // DBUSINTERFACE_H

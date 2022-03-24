@@ -88,6 +88,11 @@ const QString &DeviceCpu::driver() const
     return m_Driver;
 }
 
+bool DeviceCpu::available()
+{
+    return true;
+}
+
 bool DeviceCpu::frequencyIsRange()const
 {
     return m_FrequencyIsRange;
@@ -154,7 +159,8 @@ void DeviceCpu::setInfoFromLscpu(const QMap<QString, QString> &mapInfo)
         else {
             m_Frequency = QString("%1-%2 GHz").arg(minHz).arg(maxHz);
         }
-    } else {
+    }
+    else if(mapInfo.find("CPU MHz") != mapInfo.end()) {
         QString maxS = mapInfo["CPU MHz"];
         m_Frequency = maxS.indexOf("MHz") > -1 ? maxS : maxS + " MHz";
     }
@@ -174,13 +180,7 @@ void DeviceCpu::setCurFreq(const QString &curFreq)
     if (!curFreq.isEmpty())
         m_CurFrequency = curFreq;
 }
-/**
- * @brief setInfoFromLshw:设置cpu信息
- * @param mapInfo:由lshw获取的信息map
- * 修改记录：
- * 1.创建
- * 2.2021/11/30 修改m_Name属性来源。非龙芯CPU，由version改为取product属性内容，且不覆盖来自lscpu的modelname属性的值。//1050A故障
- */
+
 void DeviceCpu::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
 {
     // longxin CPU型号不从lshw中获取
@@ -196,7 +196,6 @@ void DeviceCpu::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
             setAttribute(mapInfo, "version", m_Name);
         }
     }
-
 
     // 获取设备基本信息
     setAttribute(mapInfo, "vendor", m_Vendor);

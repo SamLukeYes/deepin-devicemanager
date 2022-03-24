@@ -112,14 +112,14 @@ void PageBoardInfo::loadDeviceInfo(const QList<DeviceBaseInfo *> &devices, const
 //        QFontMetrics fm(font);
 //        int height = 0;
 //        QStringList strList = pairs[i - lst.size()].second.split("\n");
-//        int fontHeight = fm.boundingRect(pairs[i - lst.size()].second).height() + 2;
+//        int fontHeight = fm.boundingRect(pairs[i - lst.size()].second).height()/* + 2*/;
 //        //qInfo() << strList;
 //        // 根据行数增加行高
 //        foreach (const QString &str, strList) {
 //            QStringList lst = str.split(":");
 //            if (lst.size() == 2) {
 //                // 属性名称
-//                int width = fm.boundingRect(lst[0]).width();
+//                int width = fm.boundingRect(lst[0]).width() + fm.boundingRect(":").width();//未计算“:”，导致width为110时，实际上换行了，而高度又未算入
 //                int num = width / 110;
 //                int num0 = width % 110;
 //                if (num0 == 0)
