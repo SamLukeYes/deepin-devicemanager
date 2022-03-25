@@ -55,7 +55,7 @@ bool DBusInterface::isFirstUpdate()
     QDBusReply<bool> reply = mp_Iface->call("isFirstUpdate");
     if(reply.isValid())
         return reply.value();
-    return false;
+    return true;
 }
 
 void DBusInterface::refreshInfo()

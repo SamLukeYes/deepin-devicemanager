@@ -79,9 +79,11 @@ INSTRUCTION_RES MainJob::executeClientInstruction(const QString &instructions)
 
     if (instructions.startsWith("DETECT")) {
         // 跟新缓存信息
+        qInfo() << "DETECT 调用了 updateAllDevice *********************** ";
         updateAllDevice();
     } else if (instructions.startsWith("START")) {
         if (s_FirstUpdate) {
+            qInfo() << "START 调用了 updateAllDevice *********************** ";
             updateAllDevice();
         }
         res = IR_UPDATE;
@@ -136,6 +138,7 @@ void MainJob::slotDriverControl(bool success)
 void MainJob::onFirstUpdate()
 {
     if (s_FirstUpdate) {
+        qInfo() << "onFirstUpdate 调用了 updateAllDevice *********************** ";
         updateAllDevice();
     }
 }
